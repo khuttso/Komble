@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Practise an interview answer and get constructive feedback.">
+  <title>InterviewCoach · A little practice goes a long way</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="InterviewCoach home"><span class="brand-mark" aria-hidden="true">ic</span> InterviewCoach<span class="brand-dot">.</span></a>
+    <span class="header-note">A space to practise</span>
+  </header>
+  <main>
+    <section class="intro" aria-labelledby="page-title">
+      <p class="eyebrow"><span class="small-dot" aria-hidden="true"></span> FOR YOUR NEXT CHAPTER</p>
+      <h1 id="page-title">Find your words.<br><span>Build your confidence.</span></h1>
+      <p class="intro-copy">One question. Your own experience. A little guidance to help your next answer feel more like you.</p>
+    </section>
+
+    <div class="workspace">
+      <section class="practice-card" aria-labelledby="question">
+        <div class="card-topline"><span class="step-label">01 / YOUR PRACTICE</span><span class="pill">Entry-level · Behavioural</span></div>
+        <h2 id="question">Loading your question…</h2>
+        <p id="question-hint" class="hint"></p>
+        <p id="question-error" class="error" role="alert" hidden></p>
+        <button id="reload-question" class="text-button" type="button" hidden>Try loading the question again</button>
+        <form id="answer-form" novalidate>
+          <label for="answer">Your answer</label>
+          <textarea id="answer" name="answer" rows="8" placeholder="Think of a small moment when you made a difference…" aria-describedby="answer-help character-count privacy-note" required></textarea>
+          <div class="answer-meta"><span id="answer-help">Start with the situation, your action, and the result.</span><span id="character-count">0 / 3,000</span></div>
+          <p id="form-error" class="error" role="alert" hidden></p>
+          <button id="submit-answer" class="primary-button" type="submit" disabled><span id="button-label">Get feedback</span><span aria-hidden="true">↗</span></button>
+          <p id="request-status" class="request-status" role="status" aria-live="polite"></p>
+        </form>
+        <p id="privacy-note" class="privacy-note">Your answer is sent to an external AI provider through OpenRouter. Leave out sensitive details. This app does not save your answer or interview history.</p>
+      </section>
+
+      <aside class="feedback-card" aria-labelledby="feedback-title" aria-busy="false">
+        <div class="card-topline"><span class="step-label">02 / YOUR FEEDBACK</span><span class="feedback-dot" aria-hidden="true"></span></div>
+        <h2 id="feedback-title">A fresh perspective.</h2>
+        <div id="feedback-placeholder" class="feedback-placeholder">
+          <div class="conversation-icon" aria-hidden="true">“</div>
+          <h3>Good answers take practice.</h3>
+          <p>Share your answer to see what comes through clearly and where a little more detail could help.</p>
+          <ul class="feedback-preview"><li>Recognise your strengths</li><li>Find room to improve</li><li>Take one practical next step</li></ul>
+        </div>
+        <div id="feedback-result" hidden>
+          <section class="feedback-section"><h3><span aria-hidden="true">01</span> Strengths</h3><p id="strengths"></p></section>
+          <section class="feedback-section"><h3><span aria-hidden="true">02</span> Areas for improvement</h3><p id="improvements"></p></section>
+          <section class="feedback-section suggestion"><h3><span aria-hidden="true">03</span> One next step</h3><p id="suggestion"></p></section>
+          <p id="elapsed" class="elapsed"></p>
+        </div>
+        <p class="guidance-note">Practice guidance, not a hiring prediction.</p>
+      </aside>
+    </div>
+    <p class="closing-note">You don't need a perfect story. Start with a real one.</p>
+    <noscript><p class="error">Enable JavaScript to load the question and submit your answer.</p></noscript>
+  </main>
+  <footer><span>InterviewCoach</span><span>Small steps. Stronger answers.</span></footer>
+</body>
+</html>

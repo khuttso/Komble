@@ -1,0 +1,12 @@
+**/bin/
+**/obj/
+.local/
+TestResults/
+.idea/
+*.user
+*.suo
+*.DotSettings.user
+.env
+.env.*
+!.env.example
+

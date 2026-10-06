@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="src/InterviewCoach/InterviewCoach.csproj" />
+  <Project Path="tests/InterviewCoach.Tests/InterviewCoach.Tests.csproj" />
+</Solution>
