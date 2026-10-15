@@ -1,0 +1,52 @@
+{
+  "recorded_at": "2026-10-15T19:03:34+04:00",
+  "mode": "real CLI subprocesses with OPENROUTER_API_KEY and OPENROUTER_MODEL unset",
+  "network_requests": 0,
+  "cases": [
+    {
+      "id": "junior-backend",
+      "role": "backend developer",
+      "level": "junior",
+      "arguments": [
+        "hw1/khuttso/src/main.py",
+        "--role",
+        "backend developer",
+        "--level",
+        "junior"
+      ],
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Error: Set OPENROUTER_API_KEY and OPENROUTER_MODEL before generating questions.\n"
+    },
+    {
+      "id": "intern-marketing",
+      "role": "marketing assistant",
+      "level": "intern",
+      "arguments": [
+        "hw1/khuttso/src/main.py",
+        "--role",
+        "marketing assistant",
+        "--level",
+        "intern"
+      ],
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Error: Set OPENROUTER_API_KEY and OPENROUTER_MODEL before generating questions.\n"
+    },
+    {
+      "id": "blank-role",
+      "role": "   ",
+      "level": "junior",
+      "arguments": [
+        "hw1/khuttso/src/main.py",
+        "--role",
+        "   ",
+        "--level",
+        "junior"
+      ],
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Error: Enter a job role between 1 and 100 characters after trimming.\n"
+    }
+  ]
+}
