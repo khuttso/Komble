@@ -13,7 +13,7 @@ $env:OPENROUTER_MODEL = Read-Host 'OpenRouter model ID supporting JSON-object ou
 python hw1/khuttso/src/main.py --role "backend developer" --level junior
 ```
 
-These are the implementation's required commands; the feature is not implemented yet. Tests need no key or network. Model pricing comes from optional `OPENROUTER_INPUT_USD_PER_MILLION` and `OPENROUTER_OUTPUT_USD_PER_MILLION`; without both verified prices, cost is logged as unavailable.
+Tests need no key or network (the test suite is scheduled for step 4). Model pricing comes from optional `OPENROUTER_INPUT_USD_PER_MILLION` and `OPENROUTER_OUTPUT_USD_PER_MILLION`; without both verified prices, cost is logged as unavailable. On Windows, `py -3.12` can replace `python` if needed.
 
 ## Goal and users
 
