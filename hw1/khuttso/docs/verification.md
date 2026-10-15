@@ -34,4 +34,8 @@ The initial run passed all 80 tests but warned that pytest could not create its 
 
 `../golden.md` and `golden-results.json` record three actual CLI subprocess runs: **one validation pass and two generation failures due to missing model configuration**. No live model calls were made. Real question relevance/difficulty, provider compatibility, live latency, real token consumption/cost, and live prompt-injection behavior remain unverified. Timeout tests simulate exceptions and verify the timeout passed to the HTTP adapter; they do not measure a real network timeout.
 
-Only `hw1/khuttso/` is part of this change. The teammate's application was not modified or tested. The individual journal and delegation write-up remain for step 5.
+## Submission audit
+
+An export of commit `d734173` was created with `git archive HEAD hw1/khuttso`, extracted into a separate scratch directory, and tested using `py -3.12 -B -m pytest hw1/khuttso -q` with the same isolated pytest installation. Result: **80 passed**. This checks the committed source without relying on untracked application files; it is not a new live model test or a network clone/install test.
+
+Only `hw1/khuttso/` is part of this change. The teammate's application was not modified or tested. Step 5 adds a delegation account and submission checklist. The journal remains a marked draft awaiting the student's own Weeks 1–4 notes and dates; the homework is not yet submission-ready.
