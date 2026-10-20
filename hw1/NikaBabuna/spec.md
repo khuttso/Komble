@@ -41,12 +41,6 @@ Clicking a pack opens a preview with its metadata and questions. The pack can la
 
 ## Napkin math
 
-A realistic homework mock might hold 20 packs with 10 questions each. At roughly 200 characters per question, that is:
-
-20 packs × 10 questions × 200 characters = 40,000 characters
-
-This is a small amount of local browser data, so `localStorage` is sufficient for the mock.
-
 ## Out of scope
 
 - User accounts, sharing, or collaboration
