@@ -1,0 +1,117 @@
+{
+  "timestamp": "2026-10-20T19:32:57.001485+00:00",
+  "mode": "live",
+  "k": 5,
+  "threshold": 0.55,
+  "passed": 4,
+  "total": 5,
+  "cases": [
+    {
+      "id": "factual-star",
+      "passed": true,
+      "result": {
+        "answer": "STAR stands for Situation, Task, Action, Result [1].",
+        "grounded": true,
+        "reason": "answered",
+        "citations": [
+          {
+            "number": 1,
+            "document": "behavioral-structure.md",
+            "excerpt": "# Structuring a behavioral answer with STAR STAR means Situation, Task, Action, Result. Start with the Situation: a brief description of the context. Explain the Task or goal you were responsible for. Spend most of the answer on your own Action: what you did, why you chose it, and how you worked with others. Finish with the Result and what you learned. Use a specific truthful example. A class project, volunteering activity or personal project can work. If no numerical result exists, describe an observable outcome without inventing a metric. Keep context short enough that the listener can understand your contribution. Practise aloud, then remove details that do not help answer the question. STAR is an organising aid, not a guarantee of hiring.",
+            "score": 0.8686
+          }
+        ]
+      },
+      "missing_sources": [],
+      "missing_mentions": [],
+      "diagnosis": "Passed mechanical checks; human support review remains necessary.",
+      "elapsed_ms": 4419
+    },
+    {
+      "id": "factual-truth",
+      "passed": false,
+      "result": {
+        "answer": "I couldn't find enough support in our preparation guides to answer that. Try a more specific interview-preparation question.",
+        "citations": [],
+        "grounded": false,
+        "reason": "invalid_citations_or_ungrounded"
+      },
+      "missing_sources": [
+        "truthful-achievements.md"
+      ],
+      "missing_mentions": [
+        "invent"
+      ],
+      "diagnosis": "Expected route, required source or exact required term was missing.",
+      "elapsed_ms": 3465
+    },
+    {
+      "id": "reasoning-coursework",
+      "passed": true,
+      "result": {
+        "answer": "You can use coursework, volunteering, a personal project, or a student activity as a real example [1]. Structure your answer using the STAR method (Situation, Task, Action, Result) and clearly state that the example comes from coursework [1][4]. Focus on your own actions and responsibilities, using 'I' for what you did and 'we' for shared outcomes, and explain the actual result or what you learned [1][2][4].",
+        "grounded": true,
+        "reason": "answered",
+        "citations": [
+          {
+            "number": 1,
+            "document": "limited-experience.md",
+            "excerpt": "# Answering with limited professional experience You can use coursework, volunteering, a personal project or a student activity when you do not have professional work experience. Choose a real example that demonstrates the skill being asked about. Explain your own responsibility and actions rather than presenting the whole team's work as yours. For a behavioral question, organise the example with Situation, Task, Action, Result. Say clearly when the example comes from coursework. You do not need to pretend it was paid employment. If the result was incomplete, explain the actual outcome and what you learned. If you have never encountered the exact situation, say so and explain a reasonable approach without claiming you already did it.",
+            "score": 0.8611
+          },
+          {
+            "number": 2,
+            "document": "teamwork.md",
+            "excerpt": "# Explain your own part in teamwork Describe the team's shared goal, then identify your own contribution. Use \"I\" for actions you performed and \"we\" for shared outcomes. Explain how you communicated, divided responsibilities or handled a disagreement. Do not take credit for work another person completed. A useful teamwork example includes a specific decision or action, how others were involved, and the real result. If the question asks about conflict, focus on the problem and your response rather than blaming a teammate. State what you would do differently next time. A course assignment is a valid practice example when it is clearly described as coursework.",
+            "score": 0.7352
+          },
+          {
+            "number": 4,
+            "document": "behavioral-structure.md",
+            "excerpt": "# Structuring a behavioral answer with STAR STAR means Situation, Task, Action, Result. Start with the Situation: a brief description of the context. Explain the Task or goal you were responsible for. Spend most of the answer on your own Action: what you did, why you chose it, and how you worked with others. Finish with the Result and what you learned. Use a specific truthful example. A class project, volunteering activity or personal project can work. If no numerical result exists, describe an observable outcome without inventing a metric. Keep context short enough that the listener can understand your contribution. Practise aloud, then remove details that do not help answer the question. STAR is an organising aid, not a guarantee of hiring.",
+            "score": 0.7119
+          }
+        ]
+      },
+      "missing_sources": [],
+      "missing_mentions": [],
+      "diagnosis": "Passed mechanical checks; human support review remains necessary.",
+      "elapsed_ms": 3798
+    },
+    {
+      "id": "edge-teamwork-typo",
+      "passed": true,
+      "result": {
+        "answer": "To explain your part in teamwork, first describe the team's shared goal and then identify your specific contribution using 'I' for your actions and 'we' for shared outcomes [1]. Explain how you communicated, divided responsibilities, or handled a disagreement without taking credit for others' work [1]. A useful example includes a specific decision or action, how others were involved, and the real result [1].",
+        "grounded": true,
+        "reason": "answered",
+        "citations": [
+          {
+            "number": 1,
+            "document": "teamwork.md",
+            "excerpt": "# Explain your own part in teamwork Describe the team's shared goal, then identify your own contribution. Use \"I\" for actions you performed and \"we\" for shared outcomes. Explain how you communicated, divided responsibilities or handled a disagreement. Do not take credit for work another person completed. A useful teamwork example includes a specific decision or action, how others were involved, and the real result. If the question asks about conflict, focus on the problem and your response rather than blaming a teammate. State what you would do differently next time. A course assignment is a valid practice example when it is clearly described as coursework.",
+            "score": 0.7697
+          }
+        ]
+      },
+      "missing_sources": [],
+      "missing_mentions": [],
+      "diagnosis": "Passed mechanical checks; human support review remains necessary.",
+      "elapsed_ms": 2260
+    },
+    {
+      "id": "refusal-unrelated",
+      "passed": true,
+      "result": {
+        "answer": "I couldn't find enough support in our preparation guides to answer that. Try a more specific interview-preparation question.",
+        "citations": [],
+        "grounded": false,
+        "reason": "below_threshold"
+      },
+      "missing_sources": [],
+      "missing_mentions": [],
+      "diagnosis": "Passed mechanical checks; human support review remains necessary.",
+      "elapsed_ms": 16
+    }
+  ]
+}

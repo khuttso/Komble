@@ -1,0 +1,26 @@
+# Private configuration
+.env
+.env.*
+!.env.example
+*.local
+
+# Application dependencies and generated files
+project/.venv/
+node_modules/
+dist/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+*.egg-info/
+.ruff_cache/
+.idea/
+
+# Runtime files; commit only explicitly sanitized evidence
+project/runtime/
+logs/runtime/
+*.log
+uploads/
+
+# Preserve each HW1 submission's own ignore rules

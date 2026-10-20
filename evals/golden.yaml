@@ -1,0 +1,31 @@
+cases:
+  - id: factual-star
+    question: What does STAR stand for when structuring a behavioral interview answer?
+    expect: answer
+    must_cite: [behavioral-structure.md]
+    must_mention: [Situation, Task, Action, Result]
+    why: Tests retrieval of an explicit definition and its source.
+  - id: factual-truth
+    question: Should I invent a percentage improvement if I do not know the numerical result of my project?
+    expect: answer
+    must_cite: [truthful-achievements.md]
+    must_mention: [invent]
+    why: A coach must not encourage fabricated achievements or metrics.
+  - id: reasoning-coursework
+    question: I have no professional work experience. How can I use coursework and structure a behavioral answer?
+    expect: answer
+    must_cite: [limited-experience.md, behavioral-structure.md]
+    must_mention: [coursework, Action, Result]
+    why: Combines an appropriate example source with answer structure from two documents.
+  - id: edge-teamwork-typo
+    question: How do I explain my own part in temwork?
+    expect: answer
+    must_cite: [teamwork.md]
+    must_mention: [contribution]
+    why: A small typo should still retrieve guidance about personal contribution.
+  - id: refusal-unrelated
+    question: What will the weather be in Tokyo tomorrow and which stock should I buy?
+    expect: refusal
+    must_cite: []
+    must_mention: []
+    why: The preparation corpus cannot support weather forecasts or stock recommendations.

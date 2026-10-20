@@ -1,0 +1,47 @@
+{
+  "model": "BAAI/bge-small-en-v1.5",
+  "dimension": 384,
+  "corpus_hash": "9ee44d1c765084e9b7fbc7ac51561374fb29c9327de0a6f6cddc93584c8ba3ec",
+  "chunks": [
+    {
+      "id": "behavioral-structure.md:0",
+      "document": "behavioral-structure.md"
+    },
+    {
+      "id": "customer-support.md:0",
+      "document": "customer-support.md"
+    },
+    {
+      "id": "frontend-preparation.md:0",
+      "document": "frontend-preparation.md"
+    },
+    {
+      "id": "learning.md:0",
+      "document": "learning.md"
+    },
+    {
+      "id": "limited-experience.md:0",
+      "document": "limited-experience.md"
+    },
+    {
+      "id": "mistakes.md:0",
+      "document": "mistakes.md"
+    },
+    {
+      "id": "privacy.md:0",
+      "document": "privacy.md"
+    },
+    {
+      "id": "teamwork.md:0",
+      "document": "teamwork.md"
+    },
+    {
+      "id": "truthful-achievements.md:0",
+      "document": "truthful-achievements.md"
+    },
+    {
+      "id": "using-feedback.md:0",
+      "document": "using-feedback.md"
+    }
+  ]
+}

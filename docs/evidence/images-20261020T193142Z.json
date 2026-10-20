@@ -1,0 +1,30 @@
+{
+  "timestamp": "2026-10-20T19:31:42.227761+00:00",
+  "origin": "synthetic",
+  "cases": [
+    {
+      "fixture": "clean",
+      "passed": false,
+      "error": "The model did not finish a usable response. Your input is preserved; retry manually.",
+      "elapsed_ms": 12284
+    },
+    {
+      "fixture": "degraded",
+      "passed": false,
+      "error": "The model did not finish a usable response. Your input is preserved; retry manually.",
+      "elapsed_ms": 12427
+    },
+    {
+      "fixture": "ambiguous",
+      "passed": false,
+      "error": "The model did not finish a usable response. Your input is preserved; retry manually.",
+      "elapsed_ms": 11121
+    },
+    {
+      "fixture": "not-applicable",
+      "passed": false,
+      "error": "The model did not finish a usable response. Your input is preserved; retry manually.",
+      "elapsed_ms": 10886
+    }
+  ]
+}
