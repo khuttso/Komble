@@ -8,9 +8,9 @@
 | --- | --- | --- | --- |
 | Anastasia Khevtsuriani | @aniararis | Specification and evaluation keeper; answer-feedback feature | Repository maintenance and integration |
 | Luka Khutsidze | @khuttso | Repository and integration keeper; interview-question feature | Specification review and evaluation |
-| Nikoloz Babunashvili | @NikaBabuna | Shared application engineer; responsible for the InterviewCoach Pack Hub feature | QA and release verification |
+| Nikoloz Babunashvili | @NikaBabuna | Shared application engineer; InterviewCoach Pack Hub feature | QA and release verification |
 
-Roles stay fixed initially, and we review the workload each week. Anastasia maintains the specification, acceptance criteria, and golden questions. Luka maintains the repository structure, run instructions, and integration of shared work. Nikoloz implements shared application features, including the InterviewCoach Pack Hub feature, and supports QA and release verification. All members implement and test their own contributions and review each other's work through their backup roles. On Demo Day, any member should be able to explain the whole project.
+Roles stay fixed initially, and we review the workload each week. Anastasia maintains the specification, acceptance criteria, and golden questions. Luka maintains the repository structure, run instructions, and integration of shared work. Nikoloz implements shared application features and supports QA and release verification. All members implement and test their own contributions and review each other's work through their backup roles. On Demo Day, any member should be able to explain the whole project.
 
 ## How we decide
 
