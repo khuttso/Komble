@@ -1,5 +1,18 @@
 # Shared application delegation log
 
+## 21 October 2026: submission document revision
+
+At the user's request, Codex revised Anastasia's four HW1 documents and the team
+Design Review using the existing source and saved evidence. Individual source
+and other teammates' homework are unchanged. The review preserves the 4/5 team
+golden result and separates it from the individual feature's live failures.
+Historical journal statements remain subject to Anastasia's confirmation.
+A fresh individual .NET restore failed before tests ran; no new passing tests or
+live model results are claimed. Document links were checked against the repository.
+The user subsequently authorized adding the documents to the repository; they
+are prepared on `codex/aniararis-hw1-design-review` for review. No teammate approval,
+merge, grading tag or Teams form submission is claimed by this entry.
+
 ## 20 October 2026: foundation
 
 User approved the detailed roadmap, specified `project/` for product source, asked
