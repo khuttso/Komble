@@ -1,0 +1,113 @@
+{
+  "timestamp": "2026-10-20T19:32:14.021939+00:00",
+  "mode": "live",
+  "k": 3,
+  "threshold": 0.55,
+  "passed": 2,
+  "total": 5,
+  "cases": [
+    {
+      "id": "factual-star",
+      "passed": false,
+      "result": {
+        "answer": "I couldn't find enough support in our preparation guides to answer that. Try a more specific interview-preparation question.",
+        "citations": [],
+        "grounded": false,
+        "reason": "invalid_citations_or_ungrounded"
+      },
+      "missing_sources": [
+        "behavioral-structure.md"
+      ],
+      "missing_mentions": [
+        "Situation",
+        "Task",
+        "Action",
+        "Result"
+      ],
+      "diagnosis": "Expected route, required source or exact required term was missing.",
+      "elapsed_ms": 5167
+    },
+    {
+      "id": "factual-truth",
+      "passed": false,
+      "result": {
+        "answer": "I couldn't find enough support in our preparation guides to answer that. Try a more specific interview-preparation question.",
+        "citations": [],
+        "grounded": false,
+        "reason": "invalid_citations_or_ungrounded"
+      },
+      "missing_sources": [
+        "truthful-achievements.md"
+      ],
+      "missing_mentions": [
+        "invent"
+      ],
+      "diagnosis": "Expected route, required source or exact required term was missing.",
+      "elapsed_ms": 3331
+    },
+    {
+      "id": "reasoning-coursework",
+      "passed": false,
+      "result": {
+        "answer": "You can structure a behavioral answer using coursework by following the Situation, Task, Action, Result framework and clearly stating that the example comes from a course assignment [1]. Focus on explaining your own responsibility and actions within the team, using 'I' for your specific contributions and 'we' for shared outcomes [2]. Even if the result was incomplete, describe the actual outcome and what you learned from the experience [1].",
+        "grounded": true,
+        "reason": "answered",
+        "citations": [
+          {
+            "number": 1,
+            "document": "limited-experience.md",
+            "excerpt": "# Answering with limited professional experience You can use coursework, volunteering, a personal project or a student activity when you do not have professional work experience. Choose a real example that demonstrates the skill being asked about. Explain your own responsibility and actions rather than presenting the whole team's work as yours. For a behavioral question, organise the example with Situation, Task, Action, Result. Say clearly when the example comes from coursework. You do not need to pretend it was paid employment. If the result was incomplete, explain the actual outcome and what you learned. If you have never encountered the exact situation, say so and explain a reasonable approach without claiming you already did it.",
+            "score": 0.8611
+          },
+          {
+            "number": 2,
+            "document": "teamwork.md",
+            "excerpt": "# Explain your own part in teamwork Describe the team's shared goal, then identify your own contribution. Use \"I\" for actions you performed and \"we\" for shared outcomes. Explain how you communicated, divided responsibilities or handled a disagreement. Do not take credit for work another person completed. A useful teamwork example includes a specific decision or action, how others were involved, and the real result. If the question asks about conflict, focus on the problem and your response rather than blaming a teammate. State what you would do differently next time. A course assignment is a valid practice example when it is clearly described as coursework.",
+            "score": 0.7352
+          }
+        ]
+      },
+      "missing_sources": [
+        "behavioral-structure.md"
+      ],
+      "missing_mentions": [],
+      "diagnosis": "Expected route, required source or exact required term was missing.",
+      "elapsed_ms": 3456
+    },
+    {
+      "id": "edge-teamwork-typo",
+      "passed": true,
+      "result": {
+        "answer": "To explain your part in teamwork, first describe the team's shared goal and then identify your specific contribution using 'I' for your actions and 'we' for shared outcomes [1]. You should explain how you communicated, divided responsibilities, or handled a disagreement without taking credit for work another person completed [1]. If the question involves conflict, focus on the problem and your response rather than blaming a teammate, and state what you would do differently next time [1].",
+        "grounded": true,
+        "reason": "answered",
+        "citations": [
+          {
+            "number": 1,
+            "document": "teamwork.md",
+            "excerpt": "# Explain your own part in teamwork Describe the team's shared goal, then identify your own contribution. Use \"I\" for actions you performed and \"we\" for shared outcomes. Explain how you communicated, divided responsibilities or handled a disagreement. Do not take credit for work another person completed. A useful teamwork example includes a specific decision or action, how others were involved, and the real result. If the question asks about conflict, focus on the problem and your response rather than blaming a teammate. State what you would do differently next time. A course assignment is a valid practice example when it is clearly described as coursework.",
+            "score": 0.7697
+          }
+        ]
+      },
+      "missing_sources": [],
+      "missing_mentions": [],
+      "diagnosis": "Passed mechanical checks; human support review remains necessary.",
+      "elapsed_ms": 3699
+    },
+    {
+      "id": "refusal-unrelated",
+      "passed": true,
+      "result": {
+        "answer": "I couldn't find enough support in our preparation guides to answer that. Try a more specific interview-preparation question.",
+        "citations": [],
+        "grounded": false,
+        "reason": "below_threshold"
+      },
+      "missing_sources": [],
+      "missing_mentions": [],
+      "diagnosis": "Passed mechanical checks; human support review remains necessary.",
+      "elapsed_ms": 15
+    }
+  ]
+}

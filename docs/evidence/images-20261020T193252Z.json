@@ -1,0 +1,110 @@
+{
+  "timestamp": "2026-10-20T19:32:52.914626+00:00",
+  "origin": "synthetic",
+  "cases": [
+    {
+      "fixture": "clean",
+      "passed": true,
+      "result": {
+        "decision": {
+          "route": "accept",
+          "reasons": [
+            "Required fields have matching evidence. Check them before using them."
+          ],
+          "fields": {
+            "role_title": "Junior Frontend Developer",
+            "seniority": "Junior",
+            "requirements": [
+              "HTML and CSS",
+              "JavaScript",
+              "Accessible forms and keyboard navigation"
+            ]
+          }
+        },
+        "evidence": {
+          "role_title": "Junior Frontend Developer",
+          "seniority": "Junior",
+          "requirements": "- HTML and CSS\n- JavaScript\n- Accessible forms and keyboard navigation"
+        }
+      },
+      "elapsed_ms": 2510
+    },
+    {
+      "fixture": "degraded",
+      "passed": true,
+      "result": {
+        "decision": {
+          "route": "review",
+          "reasons": [
+            "Role title is missing or lacks matching visible evidence; enter it yourself."
+          ],
+          "fields": {
+            "role_title": null,
+            "seniority": null,
+            "requirements": [
+              "HTML and CSS",
+              "JavaScript",
+              "Accessible forms and keyboard navigation"
+            ]
+          }
+        },
+        "evidence": {
+          "role_title": null,
+          "seniority": null,
+          "requirements": "- HTML and CSS\n- JavaScript\n- Accessible forms and keyboard navigation"
+        }
+      },
+      "elapsed_ms": 2158
+    },
+    {
+      "fixture": "ambiguous",
+      "passed": true,
+      "result": {
+        "decision": {
+          "route": "confirm",
+          "reasons": [
+            "Confirm role title from the advert; its extraction is uncertain.",
+            "Confirm seniority from the advert; its extraction is uncertain."
+          ],
+          "fields": {
+            "role_title": null,
+            "seniority": null,
+            "requirements": [
+              "Python",
+              "Team collaboration"
+            ]
+          }
+        },
+        "evidence": {
+          "role_title": null,
+          "seniority": null,
+          "requirements": "- Python\n- Team collaboration"
+        }
+      },
+      "elapsed_ms": 1859
+    },
+    {
+      "fixture": "not-applicable",
+      "passed": true,
+      "result": {
+        "decision": {
+          "route": "reject",
+          "reasons": [
+            "This does not appear to be a job advert."
+          ],
+          "fields": {
+            "role_title": null,
+            "seniority": null,
+            "requirements": null
+          }
+        },
+        "evidence": {
+          "role_title": null,
+          "seniority": null,
+          "requirements": null
+        }
+      },
+      "elapsed_ms": 1680
+    }
+  ]
+}

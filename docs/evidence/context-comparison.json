@@ -1,0 +1,11 @@
+{
+  "question": "What does STAR stand for when structuring a behavioral interview answer?",
+  "mode": "local_only",
+  "tokenizer": "BGE local tokenizer; not the generation provider tokenizer",
+  "full_corpus_passages": 10,
+  "retrieved_passages": 5,
+  "full_corpus_local_tokens": 1311,
+  "retrieved_local_tokens": 677,
+  "context_reduction_percent": 48.36,
+  "limits": "Excludes instructions and query overhead. Proxy counts are not measured generation-provider tokens. No full corpus was uploaded."
+}

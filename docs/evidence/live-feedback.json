@@ -1,0 +1,10 @@
+{
+  "input_origin": "synthetic test content, not a student's personal history",
+  "outcome": "validated",
+  "feedback": {
+    "strengths": "The answer identifies a relevant problem in a course project and describes concrete actions taken, such as reproducing the issue and testing. It shows a structured approach to problem-solving with a positive outcome.",
+    "improvements": "The answer is brief and lacks detail on the candidate's specific role and contributions. It could benefit from more explanation of the steps taken, such as how they implemented the solution. The result is mentioned but not clearly framed as a successful resolution.",
+    "suggestion": "Elaborate on the specific actions you took, including your individual role and how you implemented the solution, to provide a more complete picture of your problem-solving process."
+  },
+  "elapsed_ms": 11806
+}

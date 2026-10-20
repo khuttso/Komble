@@ -1,0 +1,10 @@
+{
+  "input_origin": "synthetic test content, not a student's personal history",
+  "outcome": "validated",
+  "feedback": {
+    "strengths": "The response could be more detailed by explaining the technical approach or the thought process behind separating draft state from validation. Adding context about the tools or methods used would enhance clarity.",
+    "improvements": "The answer is relevant and concise, directly addressing the problem-solving scenario. It clearly states the issue, actions taken, and the positive outcome, showing practical application.",
+    "suggestion": "Consider elaborating on the specific steps, such as how you implemented the separation or any challenges faced during testing."
+  },
+  "elapsed_ms": 10920
+}

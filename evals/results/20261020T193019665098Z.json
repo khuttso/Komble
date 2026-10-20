@@ -1,0 +1,69 @@
+{
+  "timestamp": "2026-10-20T19:30:19.665098+00:00",
+  "mode": "live",
+  "k": 3,
+  "threshold": 0.55,
+  "passed": 2,
+  "total": 5,
+  "cases": [
+    {
+      "id": "factual-star",
+      "passed": true,
+      "result": {
+        "answer": "STAR stands for Situation, Task, Action, and Result [1].",
+        "grounded": true,
+        "reason": "answered",
+        "citations": [
+          {
+            "number": 1,
+            "document": "behavioral-structure.md",
+            "excerpt": "# Structuring a behavioral answer with STAR STAR means Situation, Task, Action, Result. Start with the Situation: a brief description of the context. Explain the Task or goal you were responsible for. Spend most of the answer on your own Action: what you did, why you chose it, and how you worked with others. Finish with the Result and what you learned. Use a specific truthful example. A class project, volunteering activity or personal project can work. If no numerical result exists, describe an observable outcome without inventing a metric. Keep context short enough that the listener can understand your contribution. Practise aloud, then remove details that do not help answer the question. STAR is an organising aid, not a guarantee of hiring.",
+            "score": 0.8686
+          }
+        ]
+      },
+      "missing_sources": [],
+      "missing_mentions": [],
+      "diagnosis": "Passed mechanical checks; human support review remains necessary.",
+      "elapsed_ms": 9690
+    },
+    {
+      "id": "factual-truth",
+      "passed": false,
+      "error": "The model did not finish a usable response. Your input is preserved; retry manually.",
+      "error_type": "ModelError",
+      "diagnosis": "No verified answer; operational failure counts as a failed case.",
+      "elapsed_ms": 13283
+    },
+    {
+      "id": "reasoning-coursework",
+      "passed": false,
+      "error": "The model did not finish a usable response. Your input is preserved; retry manually.",
+      "error_type": "ModelError",
+      "diagnosis": "No verified answer; operational failure counts as a failed case.",
+      "elapsed_ms": 13863
+    },
+    {
+      "id": "edge-teamwork-typo",
+      "passed": false,
+      "error": "The model did not finish a usable response. Your input is preserved; retry manually.",
+      "error_type": "ModelError",
+      "diagnosis": "No verified answer; operational failure counts as a failed case.",
+      "elapsed_ms": 13479
+    },
+    {
+      "id": "refusal-unrelated",
+      "passed": true,
+      "result": {
+        "answer": "I couldn't find enough support in our preparation guides to answer that. Try a more specific interview-preparation question.",
+        "citations": [],
+        "grounded": false,
+        "reason": "below_threshold"
+      },
+      "missing_sources": [],
+      "missing_mentions": [],
+      "diagnosis": "Passed mechanical checks; human support review remains necessary.",
+      "elapsed_ms": 20
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "source": "verified-usage.jsonl",
+  "generation_model": "dots-studio/dots-3-note-preview:free",
+  "feedback": {
+    "samples": 1,
+    "tokens_in_mean": 234,
+    "tokens_out_mean": 153,
+    "elapsed_ms_mean": 5094,
+    "cost_usd_mean": 0,
+    "failures": 0
+  },
+  "guidance_latest_golden": {
+    "samples": 4,
+    "tokens_in_mean": 821.75,
+    "tokens_out_mean": 82,
+    "elapsed_ms_mean": 3162.25,
+    "cost_usd_mean": 0,
+    "failures": 0
+  },
+  "extraction_completed": {
+    "samples": 5,
+    "tokens_in_mean": 1042.4,
+    "tokens_out_mean": 87.2,
+    "elapsed_ms_mean": 2105.6,
+    "cost_usd_mean": 0,
+    "failures": 0
+  },
+  "all_real_generation": {
+    "samples": 25,
+    "tokens_in_mean": 736.92,
+    "tokens_out_mean": 415.68,
+    "elapsed_ms_mean": 6592.64,
+    "cost_usd_mean": 0,
+    "failures": 7
+  },
+  "local_index_build": {
+    "samples": 1,
+    "tokens_in_mean": null,
+    "tokens_out_mean": null,
+    "elapsed_ms_mean": 45484,
+    "cost_usd_mean": 0,
+    "failures": 0
+  },
+  "monthly_workload": {
+    "users": 20,
+    "feedback_per_user": 10,
+    "guidance_per_user": 10,
+    "imports_per_user": 1,
+    "total_requests": 420
+  },
+  "limits": [
+    "Provider-reported costs only; hardware/hosting excluded.",
+    "Free capacity/quota is not guaranteed.",
+    "Guidance generation rows include the answerable case refused by citation checks.",
+    "Local embeddings use no provider tokens.",
+    "Not a ten-trial feedback latency study."
+  ],
+  "monthly_provider_cost_usd": 0
+}
