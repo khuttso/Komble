@@ -8,12 +8,13 @@
 | --- | --- | --- | --- |
 | Anastasia Khevtsuriani | @aniararis | Specification and evaluation keeper; answer-feedback feature | Repository maintenance and integration |
 | Luka Khutsidze | @khuttso | Repository and integration keeper; interview-question feature | Specification review and evaluation |
+| Nikoloz Babunashvili | @NikaBabuna | Shared application engineer | QA and release verification |
 
-Roles stay fixed initially, and we review the workload each week. Anastasia maintains the specification, acceptance criteria, and golden questions. Luka maintains the repository structure, run instructions, and integration of shared work. Both members implement and test their own contributions and review each other's work through their backup roles. On Demo Day, either member should be able to explain the whole project.
+Roles stay fixed initially, and we review the workload each week. Anastasia maintains the specification, acceptance criteria, and golden questions. Luka maintains the repository structure, run instructions, and integration of shared work. Nikoloz implements shared application features and supports QA and release verification. All members implement and test their own contributions and review each other's work through their backup roles. On Demo Day, any member should be able to explain the whole project.
 
 ## How we decide
 
-Small things: whoever is doing the work decides and shares anything the other member needs to know. Big things, including scope, stack, and pivots, require consensus between both members. If we cannot agree, we discuss the tradeoffs and ask the instructor for guidance if needed.
+Small things: whoever is doing the work decides and shares anything the other team members need to know. Big things, including scope, stack, and pivots, require consensus among all members. If we cannot agree, we discuss the tradeoffs and ask the instructor for guidance if needed.
 
 ## When we work
 
@@ -23,7 +24,7 @@ We agree on shared availability windows each week and let each other know when w
 
 ## Contribution
 
-Work is visible in commits and each member's journal. We divide tasks clearly, review progress weekly, and raise uneven workloads during that week instead of waiting until Week 15. Each member remains responsible for their own individual homework submission. For shared work, the other member reviews changes before they are merged.
+Work is visible in commits and each member's journal. We divide tasks clearly, review progress weekly, and raise uneven workloads during that week instead of waiting until Week 15. Each member remains responsible for their own individual homework submission. For shared work, at least one other team member reviews changes before they are merged.
 
 ## When it breaks
 
@@ -37,3 +38,4 @@ A commit to this file from each member's own GitHub account counts as their sign
 
 - Anastasia Khevtsuriani (@aniararis): Signed.
 - Luka Khutsidze (@khuttso): pending personal signature commit.
+- Nikoloz Babunashvili (@NikaBabuna): Signed.
