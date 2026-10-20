@@ -1,153 +1,82 @@
-# InterviewCoach · Design Review
+# InterviewCoach · Team Design Review
+**Anastasia Khevtsuriani · Luka Khutsidze · Nikoloz Babunashvili**
 
-20 October 2026 · shared local prototype · team review/submission pending.
-This review describes implemented behavior and agent-run evidence. It does not
-claim that the branch has been merged, tagged, or independently reviewed.
+Revised 21 October 2026 against `main` commit `6553a18`. Evidence below is from the repository’s saved 20 October runs, not new live runs. Human review and submission remain unconfirmed.
 
-## 1. Problem, users and success criteria
+## 1. Problem, users and intended outcome
 
-Students and recent graduates preparing for entry-level interviews need relevant
-questions, specific feedback on truthful examples, and preparation guidance they
-can inspect. InterviewCoach connects role packs, written practice, job-advert
-extraction and sourced guidance. It does not make hiring decisions.
+Students and recent graduates need relevant entry-level interview questions, actionable feedback on truthful examples, and preparation guidance with inspectable sources. InterviewCoach connects question packs, written practice, job-advert screenshot import and sourced guidance in one local application. It is a practice aid, not a hiring predictor.
 
-The [shared specification](spec.md) defines four checkable criteria:
-
-| Criterion | Current evidence |
-|---|---|
-| Practise a selected/custom question; validate input; preserve drafts through navigation and provider errors | [API safety tests](../project/tests/test_safety.py), [browser verification](verification.md), [live feedback](evidence/live-feedback.json) |
-| Downscale images, validate extraction, leave unsupported required fields empty and require human review | [extraction/policy code](../project/backend/app/extraction.py), [confidence policy](confidence-policy.md), [four live fixtures](evidence/images-20261020T193252Z.json) |
-| Retrieve scored passages, refuse below threshold before generation, and reject invalid citations | [grounding code/tests](../project/backend/app/grounding.py), [golden result](../evals/results/20261020T193257001485Z.json) |
-| Record real usage/latency without private inputs; enforce free-only access | [gateway](../project/backend/app/llm.py), [sanitized logs](../logs/verified-usage.jsonl), [budget](../logs/budget-summary.json) |
-
-The live golden target is not fully met (4/5); the proposed 9/10 requests within
-15 seconds has not been demonstrated by a ten-trial study.
+The [shared specification](spec.md) requires validated answers and recoverable errors; cautious image extraction with human confirmation; cited guidance or refusal; and privacy-conscious usage logging with free-only model access. Current evidence supports the implemented flows, but the live golden target is incomplete at **4/5**, and the proposed 9/10-under-15-seconds latency target is unverified. Accounts, persistent answer history, voice interviews and deployment are outside the current scope.
 
 ## 2. Architecture and data flow
 
-```mermaid
-flowchart TD
-    User[Student] --> UI[React application]
-    UI <--> Packs[Browser localStorage: personal packs]
-    UI <--> Memory[Page memory: answer drafts and feedback]
-    UI --> Feedback[Validate current question and answer]
-    Feedback --> Text[Free text model through llm.py]
-    Text --> Validate[Validate feedback JSON]
-    Validate --> UI
-    UI --> Image[Temporary image; decode and downscale to 1024 px]
-    Image --> Vision[Free vision model through llm.py]
-    Vision --> Policy[Validate fields; pure decide function]
-    Policy --> Human[Human inspection or manual correction]
-    Human --> UI
-    Corpus[Versioned preparation documents] --> Embed[Local CPU embedding model through llm.py]
-    Embed --> Index[Local index: model, dimension, corpus hash]
-    UI --> Query[Preparation question]
-    Query --> Embed
-    Embed --> Retrieve[Cosine scored retrieval]
-    Index --> Retrieve
-    Retrieve --> Threshold[Top 5; threshold 0.55]
-    Threshold --> Generate[Free text model through llm.py]
-    Threshold --> Refuse[Readable refusal]
-    Generate --> Citations[Schema and citation checks]
-    Citations --> UI
-    Citations --> Refuse
-    Refuse --> UI
-    Text --> Logs[Allowlisted usage/outcome logs]
-    Vision --> Logs
-    Embed --> Logs
-    Generate --> Logs
-    Refuse --> Logs
-```
+The shared product in `project/` uses React/Vite and FastAPI/Pydantic. Individual C# and React homework remains separate. The application has three model paths:
 
-Starter packs come from [versioned content](../project/backend/app/content.py).
-Custom pack/question text is untrusted; the server validates the current question
-and answer rather than trusting a homework-only question ID. Feedback assesses
-the answer against a fixed rubric, with no promise of hiring success.
+| Path | Data flow and boundary |
+|---|---|
+| Written practice | Student selects a starter/personal question → server validates question and 1–3,000-character answer → `llm.py` sends the current exchange and rubric → validated feedback sections return as plain text. Errors preserve the draft. |
+| Job-advert import | JPEG/PNG under 2 MB → decode and downscale to at most 1,024 px on the longest side → vision extraction → schema, field/evidence and uncertainty checks → student reviews/corrects fields before use. |
+| Sourced guidance | Query → local embedding → cosine retrieval over the versioned corpus → top five passages filtered at 0.55 → generation with numbered sources → citation checks → cited answer or refusal. No accepted passage means no generation call. |
 
-Images are JPEG/PNG under 2 MB, decoded and downsized before external processing.
-The [confidence policy](confidence-policy.md) combines required-field presence,
-evidence/value consistency, ambiguity and model confidence. Doubtful values remain
-empty; the student supplies corrections explicitly. Images/answers are not saved
-in an application store; page drafts disappear on session end/reload.
+Starter packs and ten AI-assisted preparation guides are versioned. Personal packs use browser localStorage; answer drafts/feedback remain in page memory, and images are processed temporarily. External processing is disclosed. Logs contain allowlisted operation, outcome, timing and available usage metadata, excluding answers, images and keys.
 
-[Ten AI-assisted team-authored guides](../data/corpus/) are embedded locally with
-BAAI/bge-small-en-v1.5. This differs from the lab's hosted embedding example and
-is documented in [ADR 002](decisions/002-free-local-embeddings.md). A missing,
-changed-corpus or wrong-model index refuses to load. Retrieval sends only accepted
-passages to generation. Checked `[n]` markers map to expandable document excerpts.
+Local CPU embeddings use `BAAI/bge-small-en-v1.5`; the index records model, dimension and corpus hash and rejects incompatible/stale data. Generation passes through a single gateway that checks zero-price `:free` model compatibility, caps requests at 24 per process, bounds output, applies a 20-second HTTP timeout and disables provider fallback. There is no automatic paid retry. The timeout is not a demonstrated end-to-end latency guarantee.
+
+Citation checks require valid source numbers and a citation on every answer sentence. They do not prove semantic support; human source review remains necessary. [Implementation](../project/backend/app/grounding.py) · [Storage/stack decision](decisions/001-shared-app-stack.md).
 
 ## 3. Risks and safety threats
 
-| Product risk | Existing mitigation; remaining work | Owner |
+| Risk | Implemented mitigation | Remaining check / proposed owner |
 |---|---|---|
-| Invented or misplaced coaching | Fixed rubric, validated labels, no hiring guarantees; first live response swapped praise/criticism, preserved as [evidence](evidence/live-feedback-initial.json); clearer instructions improved the retest. Human quality review due 21 Oct. | Anastasia |
-| Unsupported preparation advice | Threshold refusal, grounded flag and citation checks; current answerable-case false refusal retained. Citation existence cannot prove semantic support. Expand support checks by 27 Oct. | Anastasia |
-| Wrong advert role/skills | Nullable evidence, substring consistency, ambiguity checks, empty doubtful fields and explicit confirmation. Model-provided evidence is not independent OCR proof. Test real photos by 27 Oct. | Nikoloz |
-| Private answers/images reaching a provider | UI disclosure/acknowledgment, temporary processing, no private input logging, ignored local key. Provider retention remains outside our control. Review disclosure before team use, 21 Oct. | Luka |
-| Prompt injection in questions, answers or images | Untrusted content separated from trusted instructions, narrow schemas, plain-text rendering. Message separation is tested; live adversarial resistance is not proven. Add attack cases by 27 Oct. | Luka |
-| Provider failure, quota or unexpected spend | Verified zero-price `:free` model, no paid fallback/retry, timeout, per-process call cap, preserved drafts. Free availability is not guaranteed. | Luka |
-| Lost local packs or weak source material | Browser-only storage disclosed; versioned corpus labeled AI-assisted/review pending. Review guides and define export/storage needs by 27 Oct. | Nikoloz |
+| Invented or misplaced feedback | Fixed rubric, schema validation, no hiring guarantees; initial swapped praise/criticism retained in evidence | Human quality review / Anastasia |
+| Unsupported advice or false refusal | Retrieval threshold and sentence/source citation checks | Review semantic support and failing truthful-achievements case / Anastasia |
+| Incorrect screenshot fields | Nullable values/evidence, consistency and ambiguity checks, mandatory review | Real phone photos beyond synthetic fixtures / Nikoloz |
+| Private data exposure | External-processing disclosure, temporary inputs, no private-content logs, ignored keys | Review disclosure and provider retention implications / Luka |
+| Prompt injection | Untrusted content separated from instructions; narrow output schemas and plain-text display | Live adversarial cases; message separation alone is insufficient / Luka |
+| Provider outages or spend | Zero-price catalog validation, bounded requests, no paid fallback, preserved drafts | Free capacity is not guaranteed; process restart resets call cap / Luka |
+| Lost packs or weak sources | Storage limitations disclosed; versioned corpus labelled AI-assisted | Review corpus and assess export needs / Nikoloz |
 
-Dates above are proposed follow-up commitments requiring team confirmation, not
-claims of completed teammate work.
+Owners above follow the contract’s roles and require team confirmation. Safety failures should block release even when aggregate evaluation scores look acceptable.
 
-## 4. Evaluation plan
+## 4. Evaluation and golden-set results
 
-[Golden definition](../evals/golden.yaml): two factual, one two-source reasoning,
-one typo edge case and one refusal. The [same-service runner](../evals/run_golden.py)
-calls the function used by the API. [Baseline](../evals/results/20261020T193019665098Z.json):
-**2/5**. [Selected run](../evals/results/20261020T193257001485Z.json): **4/5 (80%)**.
-The truthful-achievements question still refuses due to invalid citations or
-grounded=false despite relevant source material; it remains FAIL.
+The [five-case golden set](../evals/golden.yaml) runs the same guidance service used by the API. The saved baseline scored **2/5**; the selected [20 October run](../evals/results/20261020T193257001485Z.json), at 23:32 Tbilisi time, scored **4/5 (80%)**:
 
-[ADR 003](decisions/003-retrieval-tuning.md) records k=3 to k=5: the required second
-reasoning source ranked fourth. Optional reasoning and valid citation-punctuation
-handling also changed, so the improvement is not attributed solely to k.
-Threshold 0.55 blocks the unrelated question (best score 0.500) before generation.
-Bad citations and uncited sentences block display. Offline tests enforce those
-rules. The latest image run passed 4/4 synthetic routes; earlier truncations remain.
+| Case | Expected | Recorded result |
+|---|---|---|
+| STAR definition | Situation, Task, Action, Result; cite structure guide | PASS; 4,419 ms |
+| Inventing a percentage | Explain not to invent metrics; cite truthful-achievements guide | FAIL; application refused (`invalid_citations_or_ungrounded`); 3,465 ms |
+| Coursework without employment | Combine limited-experience and STAR guidance | PASS; 3,798 ms |
+| “temwork” typo | Explain personal contribution; cite teamwork guide | PASS; 2,260 ms |
+| Weather and stock request | Refuse outside-corpus request | PASS; below threshold, no generation; 16 ms |
 
-By Week 11: ten cases (3 factual, 2 reasoning, 2 edge, 2 refusal, 1 format), with
-human source-support review. Proposed release gate: >=8/10 overall, both refusal
-cases pass, and zero known invalid-citation displays or automatic paid calls.
-Safety-test failure blocks release regardless of aggregate score.
+These are mechanical pass/fail checks, not independent human quality ratings. [ADR 003](decisions/003-retrieval-tuning.md) records increasing retrieval k from three to five because a needed second source ranked fourth. Reasoning settings and citation-punctuation handling also changed, so improvement cannot be attributed solely to retrieval k.
 
-## 5. Token budget
+Existing [verification](verification.md) reports 28 offline checks, a successful frontend build and browser flow checks. The selected [synthetic image run](evidence/images-20261020T193252Z.json) passed 4/4 routes; earlier failures are retained. These results were not rerun for this documentation revision. Anastasia’s individual C# HW1 has different live results and must not inherit these passes.
 
-From [real usage logs](../logs/verified-usage.jsonl) and [summary](../logs/budget-summary.json):
+Next evaluation: fix and retest the answerable refusal, obtain human support judgments, add real photos and adversarial inputs, and measure ten deliberate end-to-end timing trials. Proposed Week 11 set: ten cases (3 factual, 2 reasoning, 2 edge, 2 refusal, 1 format). Proposed gate: at least 8/10 overall, both refusals correct, and no known invalid-citation displays or automatic paid calls.
 
-| Operation/sample | Mean input/output tokens | Mean model latency | Reported cost/request |
-|---|---:|---:|---:|
-| Feedback, latest browser request (n=1) | 234 / 153 | 5.094 s | $0 |
-| Latest golden generations (n=4) | 821.75 / 82 | 3.162 s | $0 |
-| Completed extraction requests (n=5) | 1042.4 / 87.2 | 2.106 s | $0 |
+## 5. Token budget from recorded logs
 
-These small samples do not establish a service-level guarantee. Guidance includes
-one validated model reply that the application refused. Earlier provider/model
-failures remain in the logs; local embeddings consume no provider tokens.
+The [sanitized usage log](../logs/verified-usage.jsonl) and [computed summary](../logs/budget-summary.json) record:
 
-Assume 20 users/month, each making 10 feedback requests, 10 guidance requests and
-one image import: **20 × (10 + 10 + 1) = 420 requests/month**. At the observed
-zero provider prices: **20 × (10×$0 + 10×$0 + $0) = $0/month**. Hosting,
-hardware/electricity and guaranteed free capacity are excluded.
+| Operation | Sample size | Mean input / output tokens | Mean model latency | Reported mean cost |
+|---|---:|---:|---:|---:|
+| Latest browser feedback | 1 | 234 / 153 | 5.094 s | $0 |
+| Latest golden generations | 4 | 821.75 / 82 | 3.162 s | $0 |
+| Completed extraction | 5 | 1,042.4 / 87.2 | 2.106 s | $0 |
 
-RAG versus long context: [local counts](evidence/context-comparison.json) for the
-STAR question are 677 retrieved-context versus 1,311 full-corpus BGE tokens:
-**1 − 677/1,311 = 48.36% less passage text**. These are local-tokenizer proxy
-counts, not measured generation-provider long-context usage. No full corpus was
-uploaded. At current free prices either has zero token charges; we choose RAG
-for bounded sources and pre-generation refusal, accepting local index complexity.
+Generation model recorded in the summary: `dots-studio/dots-3-note-preview:free`. The four golden generation rows include one model response subsequently refused by application checks. Across all 25 real generation rows, seven failures remain recorded; selected successful-operation samples are not an overall reliability rate. Missing usage means unknown. Local embeddings use no provider tokens.
 
-## 6. Team, roles and decisions
+Planning workload: 20 users/month × (10 feedback + 10 guidance + 1 import) = **420 requests/month**. Applying observed means gives approximately **232,998 input and 48,744 output tokens/month**, assuming every guidance request generates. At the recorded zero provider prices, estimated token charges are **$0/month**, excluding hosting/hardware and without a capacity guarantee.
 
-[TEAM-CONTRACT.md](../TEAM-CONTRACT.md) names Anastasia Khevtsuriani, Luka Khutsidze
-and Nikoloz Babunashvili. Luka's personal signature is still listed as pending;
-no signature was fabricated. [TEAM-REPO section 1](TEAM-REPO.md#1-members-and-roles)
-records specification/evaluation, repository/integration and shared-app roles.
+The [local context comparison](evidence/context-comparison.json) counts 677 retrieved-context versus 1,311 full-corpus BGE tokens: **48.36% less passage text**. These are local-tokenizer proxies, not measured generation-provider savings or a live long-context comparison. RAG is chosen for bounded context and pre-generation refusal, accepting index complexity.
 
-Decisions: [stack/storage](decisions/001-shared-app-stack.md),
-[free local embeddings](decisions/002-free-local-embeddings.md), and
-[retrieval tuning](decisions/003-retrieval-tuning.md).
-[Delegation log](delegation-log.md) identifies agent implementation and drafting,
-including this review. Teammate code/document review, remote CI, merge to main,
-appropriate lab/review tags and the repo keeper's team form remain required.
+## 6. Team, decisions and delivery status
+
+Per [TEAM-CONTRACT.md](../TEAM-CONTRACT.md), Anastasia owns specification/evaluation and answer feedback; Luka owns repository/integration and interview questions; Nikoloz owns shared application engineering and Pack Hub. Backup responsibilities support integration, review and QA. Luka’s signature is listed as pending; no approval or signature is supplied on his behalf.
+
+Key decisions are the [shared Python/React stack](decisions/001-shared-app-stack.md), [free local embeddings](decisions/002-free-local-embeddings.md), and [retrieval tuning](decisions/003-retrieval-tuning.md). Existing implementation and evidence are already on inspected `main` through merge `6553a18`; this revised review is a local draft. Codex drafted this revision from repository evidence. Team code/corpus review and agreement on follow-up work are still needed.
+
+The supplied deadline was **20 October 2026, 23:59 Tbilisi**, which has passed at revision time. No `design-review` tag was advertised by the inspected remote clone. Revised-document merge, tag publication and Teams form submission are not claimed. The repo keeper must confirm the permitted submission process; do not backdate evidence or claim an on-time submission without evidence.

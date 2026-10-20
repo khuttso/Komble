@@ -1,52 +1,22 @@
-# Spec v0 · InterviewCoach
+# HW1 specification · InterviewCoach Answer Feedback
+**Anastasia Khevtsuriani · @aniararis · revised 21 October 2026**
 
-## Problem
+**Problem and users.** Students and recent graduates preparing for entry-level interviews need specific feedback on written practice answers when no practice partner is available.
 
-Students and recent graduates preparing for their first job interviews often lack someone to practise with. Without specific feedback, they struggle to identify unclear, incomplete, or irrelevant answers.
+**Smallest useful feature.** A local ASP.NET Core page displays “Tell me about a time you solved a problem.” The student enters an answer and receives three labelled sections: strengths, areas for improvement, and one actionable suggestion. Feedback assesses relevance, clarity and completeness; it does not predict hiring success. The existing implementation is in `src/InterviewCoach/`.
 
-## Users
+**Context supplied to the model.** Only the selected question from `data/questions.json`, the current trimmed answer, `data/feedback-rubric.md`, and `src/InterviewCoach/Prompts/feedback.txt`. Instructions occupy the system message; the answer is untrusted user content. There is no conversation history or retrieval pipeline in this individual feature.
 
-Students and recent graduates preparing for entry-level job interviews who want to practise written answers independently.
+**Acceptance criteria.**
 
-## Success criteria
+1. Display the prepared question; accept 1–3,000 characters after trimming. Reject blank/overlong answers and unknown question IDs on the server without a model call.
+2. Display all three non-empty feedback sections as plain text. For a specific answer, refer only to supplied facts; for a vague answer, request a concrete example. Never invent experience or achievements.
+3. On provider failure, invalid output or a 20-second timeout, show a readable error and retain the answer for manual retry. Do not retry automatically.
 
-1. All three initial golden test cases meet their documented expected results.
-2. Every successful feedback response includes strengths, areas for improvement, and one actionable suggestion tied to the answer.
-3. At least 9 of 10 valid-answer trials return feedback within 15 seconds, measured from submission to display.
+**Success measures.** All three cases in [golden.md](golden.md) meet their expectations, and at least 9 of 10 valid-answer trials display feedback within 15 seconds. These are targets: the recorded live attempts do not establish either target. Existing documentation reports 44 mocked test passes; a fresh restore on 21 October failed before tests could run.
 
-## Core feature (Weeks 2 to 4 scope)
+**Budget.** Planning assumption: 20 requests/day × 30 days × (800 input + 300 output tokens) = 660,000 tokens/month. Output is capped at 1,200 tokens/request. With a verified zero-price model, provider token charges would be $0; free capacity is not guaranteed. This is an estimate, not measured individual-feature usage. Select the model via `OPENROUTER_MODEL`; keep `OPENROUTER_API_KEY` private. The C# client does not enforce the shared Python app’s free-model catalog check.
 
-A simple web page displays one general entry-level interview question from a prepared list. The user submits a written answer, and the app uses a model through OpenRouter to provide feedback on relevance, clarity, and completeness. The first version supports one question-and-answer exchange at a time and runs locally with documented setup commands.
+**Safety and exclusions.** Disclose external processing and ask users to omit sensitive information. The app does not persist answers or log answers/keys. Provider retention is outside this local guarantee. Model feedback may be wrong; message separation is tested, but live injection resistance is unverified. No accounts, database, saved history, CV upload, multi-question sessions, payments or public deployment.
 
-## Context list
-
-- **Question:** `data/questions.json`; send only the selected question to the model.
-- **Answer:** Held temporarily for the current request; not saved by the app.
-- **Rubric:** `data/feedback-rubric.md`; defines relevance, clarity, and completeness.
-- **Instructions:** `src/InterviewCoach/Prompts/feedback.txt`; defines the feedback sections and requires treating the answer as content, not instructions.
-
-Paths are relative to this homework submission folder.
-
-## Acceptance criteria
-
-1. Done when the page displays one question and accepts answers of 1–3,000 characters after trimming whitespace. Empty or overlong answers show a validation message without a model call.
-2. Done when a valid answer returns labelled strengths, areas for improvement, and an actionable suggestion. A specific example receives feedback grounded in its details; a vague answer prompts a request for a concrete example without inventing experience.
-3. Done when an API failure or a 20-second timeout displays a clear error message, preserves the answer for manual retry, and triggers no automatic paid retries.
-
-## Napkin math
-
-Current model: `google/gemma-4-26b-a4b-it:free`, configured through `OPENROUTER_MODEL`. Planning estimate: 20 requests/day, 800 input tokens and 300 output tokens per request. Published input and output prices are $0 per million tokens:
-
-20 × (800 × $0/1,000,000 + 300 × $0/1,000,000) × 30 = **$0/month** in model-token costs.
-
-Pricing checked on 6 October 2026 against the [OpenRouter model page](https://openrouter.ai/google/gemma-4-26b-a4b-it:free). Token counts and volume are estimates, not measured results. The implementation caps output at 1,200 tokens. Free access is rate-limited, and observed provider capacity failures mean this workload is not guaranteed. Hosting is excluded. This updates the original illustrative paid-price estimate after model selection; it does not change the success targets.
-
-## Risks and safety
-
-- **Misleading feedback:** Apply a consistent rubric and label feedback as practice guidance, not a hiring prediction.
-- **Personal information exposure:** Ask users to omit sensitive details, disclose external AI processing, and do not persist or log answers in the app.
-- **Misuse:** Users may embed instructions to manipulate feedback; separate answer content from system instructions and test an adversarial input.
-
-## Out of scope (for now)
-
-Accounts, databases, saved interview history, CV uploads, multi-question interviews, company-specific coaching, hiring decisions, payments, and public deployment.
+**Run.** From this folder: `dotnet restore InterviewCoach.slnx --configfile NuGet.Config`, then `dotnet run --no-restore --project src/InterviewCoach/InterviewCoach.csproj`; open `http://localhost:5180`. Configure provider variables privately first. Test with `dotnet test InterviewCoach.slnx --no-restore`. See [README.md](README.md) for setup.
