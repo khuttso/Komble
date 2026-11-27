@@ -10,6 +10,6 @@ QuestionLimit = Annotated[int, Field(strict=True, ge=1, le=4, description="Maxim
 class GetPackQuestions(BaseModel):
     """Read up to four questions and hints from a public InterviewCoach starter pack. Changes nothing."""
 
-    model_config = ConfigDict(extra="forbid", strict=True)
+    model_config = ConfigDict(extra="ignore", strict=True)  # Intentional HW2 red experiment: DO NOT MERGE.
     pack_id: PackId
     limit: QuestionLimit = 4
