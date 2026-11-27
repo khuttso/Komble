@@ -29,7 +29,12 @@ their existing question text/hints, `returned: 2`, and `total: 4`.
 
 Initial local test environment: Python 3.12.3, MCP 2.3.0, Pydantic 2.14.4,
 pytest 9.2.0, PyYAML 6.0.4. Repository requirements align Pydantic/pytest/YAML
-with the existing backend pins; exact combined-environment verification is separate.
+with the existing backend pins. After installing both committed requirements files,
+`python -m pytest project/tests tests -q` passed **58 tests in 7.32 seconds**:
+28 existing backend checks plus 30 tool checks. This final run used Pydantic 2.14.1,
+pytest 9.1.1 and PyYAML 6.0.3 with MCP 2.3.0. It verifies the new adapter alongside
+the existing application under the pinned dependencies. No frontend files changed;
+the frontend build remains in CI and was not rerun locally for this backend change.
 
 ## Contract-weakening experiment
 
