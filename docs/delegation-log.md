@@ -1,5 +1,18 @@
 # Shared application delegation log
 
+## 27 November 2026: HW2 tool implementation
+
+The user selected work on HW2 and authorized choosing the tool. Codex implemented
+`get_pack_questions`, reusing the shared public catalogue, with one strict contract,
+an allowlisted registry, dispatcher, sanitized logs, and a stdio MCP server. Root
+`src/` follows the homework adapter layout without moving the shared app or HW1.
+Codex added five golden cases and both-interface, transport and negative tests,
+and connected them to the existing CI job. No provider calls or secrets are needed.
+Remote issue creation was rejected by the GitHub integration with HTTP 403.
+Local test evidence is reported in the individual write-up; remote red/green
+evidence, required-check enforcement, human review and form submission must be
+verified separately. No previous weekly participation or teammate approval is claimed.
+
 ## 21 October 2026: submission document revision
 
 At the user's request, Codex revised Anastasia's four HW1 documents and the team

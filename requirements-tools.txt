@@ -1,0 +1,5 @@
+# MCP transport plus deterministic tool tests; no generation provider needed.
+mcp==2.3.0
+pydantic==2.14.1
+pytest==9.1.1
+PyYAML==6.0.3

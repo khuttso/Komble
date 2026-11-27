@@ -1,0 +1,42 @@
+tool_owner: aniararis
+cases:
+  - id: frontend-two
+    type: normal
+    why: A visitor receives a bounded subset of the actual frontend catalogue.
+    tool: get_pack_questions
+    caller: null
+    arguments: {pack_id: frontend, limit: 2}
+    expect: ok
+    result_has: {pack_id: frontend, returned: 2, total: 4}
+  - id: support-one
+    type: normal
+    why: Trusted caller context does not broaden access beyond public questions.
+    tool: get_pack_questions
+    caller: synthetic-caller
+    arguments: {pack_id: support, limit: 1}
+    expect: ok
+    result_has: {pack_id: support, returned: 1, total: 4}
+  - id: graduate-default
+    type: normal
+    why: Omitted limit safely defaults to four questions.
+    tool: get_pack_questions
+    caller: null
+    arguments: {pack_id: graduate}
+    expect: ok
+    result_has: {pack_id: graduate, returned: 4, total: 4}
+  - id: zero-limit
+    type: bad-input
+    why: An out-of-range limit is rejected before catalogue access.
+    tool: get_pack_questions
+    caller: null
+    arguments: {pack_id: frontend, limit: 0}
+    expect: refused
+    error_has: [Invalid arguments, limit]
+  - id: forged-identity
+    type: adversarial
+    why: The model cannot supply another user's identity, even on an otherwise valid call.
+    tool: get_pack_questions
+    caller: synthetic-caller
+    arguments: {pack_id: support, limit: 1, user_id: somebody-else}
+    expect: refused
+    error_has: [Invalid arguments, identity]
