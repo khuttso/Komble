@@ -51,18 +51,18 @@ and hides a contract regression. The normal calls remained valid, so they alone
 would not have caught it. Running the explicit adversarial case turns that mistake
 into a test failure. This local result does not prove a blocked GitHub merge.
 
-## Remote evidence still required
+## Remote evidence · updated 28 November 2026
 
 | Requirement | Status |
 |---|---|
-| Product PR / green CI URL | Not created; Git push authentication failed in the agent environment |
-| Red CI run URL | Not created; local mutation evidence above is not a substitute |
-| Failed check actually blocks merge | Not verified; main was unprotected at inspection |
+| Product branch green CI | [Passing run](https://github.com/khuttso/Komble/actions/runs/46029627824); product PR still pending |
+| Red CI | [Failed branch run](https://github.com/khuttso/Komble/actions/runs/46029627291), [PR run](https://github.com/khuttso/Komble/actions/runs/46072627282), [red PR #4](https://github.com/khuttso/Komble/pull/4) |
+| Failed check actually blocks merge | Not demonstrated. The screenshot shows a missing-review block; the test check was not required. The user chose to skip this enforcement step. |
 | Product and write-up merged to main | Pending actual review and merge |
 
-GitHub's connector also rejected issue creation with HTTP 403, “Resource not
-accessible by integration.” After repository access is available, follow
-`docs/HW2-RUNBOOK.md` on the product branch to create the issue, run the throwaway
-red PR, retain the real URLs and close it without merging. Update this table with
-those observations before submitting. The existing main CI run predates HW2 and
-is not evidence that these new tests ran remotely.
+The user pushed all three branches and opened red PR #4. Its screenshot shows
+failed checks and merging blocked because one approving review is missing.
+This establishes failed CI, but not the required test-based merge block; that
+assignment requirement remains incomplete. Close the red PR without merging.
+The connector returned HTTP 403 when attempting both PR creation and closure,
+so neither action is claimed. Product/write-up review and merge remain pending.
